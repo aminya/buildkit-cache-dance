@@ -39,7 +39,7 @@ RUN --mount=${mountArgs} \
     // Unpack Docker Image into Scratch
     await runPiped(
         ['docker', ['cp', '-L', 'cache-container:/var/dance-cache', '-']],
-        ['tar', ['-H', 'posix', '-x', '-C', scratchDir]]
+        ['tar', ['-x', '-C', scratchDir]]
     );
 
     // Move Cache into Its Place
