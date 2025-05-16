@@ -3,7 +3,15 @@ import cp, { type ChildProcess } from 'child_process';
 
 export async function run(command: string, args: string[]) {
     try {
-        return await spawnPlease(command, args);
+        
+        const res = await spawnPlease(command, args);
+        if (res.stderr) {
+            console.error(res.stderr);
+        }
+        if (res.stdout) {
+            console.log(res.stdout);
+        }
+        return res;
     } catch (error) {
         console.error(`Error running command: ${command} ${args.join(' ')}`);
         throw error;
