@@ -11,6 +11,7 @@ export type Opts = {
   "skip-extraction": boolean
   "utility-image": string
   "builder"?: string
+  context?: string
   help: boolean
   /** @deprecated Use `cache-map` instead */
   "cache-source"?: string
@@ -30,7 +31,7 @@ export function parseOpts(args: string[]): mri.Argv<Opts> {
       "builder": getInput("builder") || "default",
       "help": false,
     },
-    string: ["cache-map", "dockerfile", "scratch-dir", "cache-source", "cache-target", "utility-image", "builder"],
+    string: ["cache-map", "dockerfile", "scratch-dir", "cache-source", "cache-target", "utility-image", "builder", "context"],
     boolean: ["skip-extraction", "help", "extract"],
     alias: {
       "help": ["h"],
