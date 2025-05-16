@@ -1,4 +1,4 @@
-import { promises as fs } from 'fs';
+import { promises as fs, rm } from 'fs';
 import path from 'path';
 import { CacheOptions, Opts, getCacheMap, getMountArgsString, getTargetPath, getBuilder } from './opts.js';
 import { run, runPiped } from './run.js';
@@ -43,7 +43,11 @@ RUN --mount=${mountArgs} \
     );
 
     // Move Cache into Its Place
-    await run('sudo', ['rm', '-rf', cacheSource]);
+    try {
+        await fs.rm(cacheSource, { recursive: true, force: true });
+    } catch (error) {
+        await run('sudo', ['rm', '-rf', cacheSource]);
+    }
     await fs.rename(path.join(scratchDir, 'dance-cache'), cacheSource);
 }
 
