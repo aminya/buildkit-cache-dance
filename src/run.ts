@@ -26,7 +26,7 @@ function assertSuccess(cp: ChildProcess) {
         });
         cp.on('close', (code) => {
             if (code !== 0) {
-                reject(new Error(`process exited with code ${code}`));
+                reject(new Error(`process ${cp.spawnfile} exited with code ${code}`));
             }
             resolve();
         });
